@@ -36,52 +36,91 @@ confidenceFactor
 0.5
 Lower numbers introduce more pruning and low accuracy
 This results in much simpler, less accurate tree, but it is properly displayed. I have tried to find the balance between complexity and readability, but I could not get a per-fect result.
+
 Rule 1:
+
 If “account_status = no checking” then loan_status = “yes” (387/46)
+
 If the client’s account status is “no checking” then the loan would be most likely given. 387 instances apply to this rule, where 46 are incorrectly classified.
+
 Rule 2:
+
 If “account status = 0<=X<200” and credit amount “X>10K” then “no” (18/3)
+
 If the client’s account status is between 0 and 200 and he wants a credit above 10K then he would be rejected. 3 of 18 cases has been wrongly classified by the model.
+
 Rule 3:
+
 If “account status = 1K<X<2K” and credit amount is “1K<=X<2K” then “yes” (76/28)
 If the client’s account status is between 1000 and 2000 and he wants a credit between 1000 and 2000 then its highly likely he would be given this credit.
+
 Rule 4:
+
 If “account status = <0” and “debth_status = delayed previously” then “no” (12/3)
+
 If the client delayed his credit payment, he would not be given a credit.
-5
+
+
 Rule 5:
+
 If “account status = <0” and “debth_status = critical/other” then yes (67/18)
+
 If the clients debth status is critical or other he would be given a credit
+
 Rule 6,7,8:
+
 If “account status = <0” and “debth status = paid” then:
+
 If “savings amount = > 1000” then “yes” (4/0)
+
 If the client has savings above 1000 then he would be given a credit.
+
 If “savings amount = 500<=X<1000” then yes (6/1)
+
 The client has savings between 500 and 1000 he would be given a credit.
+
 If “saving amount < 100” and “job status = highly skilled” then yes (19/7)
+
 The client has savings below 100 but is highly skilled he would be given a credit.
 
 ### Association
 Algorithm Used - Apriori
 Settings used – Rules – 6
+
 Rule 1:
+
 account_status=no checking credit_reason=radio/tv 124 ==> loan_status=yes 117 <conf:(0.94)> lift:(1.34) lev:(0.03) [29] conv:(4.62)
+
 If the client does not have a bank account with the current bank, his credit reason is radio/tv and his loan status is yes he have a 94% chance to get a loan.
+
 Rule 2:
+
 account_status=no checking debt_status=critical/other existing credit 152 ==> loan_status=yes 142 <conf:(0.93)> lift:(1.33) lev:(0.04) [35] conv:(4.12)
+
 If the client has existing credit with other bank but not with the current he is 93% and his loan status is yes, he is 93% likely to get a credit
+
 Rule 3:
+
 account_status=no checking employment=>=7 113 ==> loan_status=yes 105 <conf:(0.93)> lift:(1.32) lev:(0.03) [25] conv:(3.74)
+
 If the client has no current bank account with the current bank, he is employed for more than 7 years and his loan status is yes then his chance for a loan is 93%.
+
 Rule 4:
+
 account_status=no checking gender:family=male single job_status=skilled 149 ==> loan_status=yes 137 <conf:(0.92)> lift:(1.31) lev:(0.03) [32] conv:(3.42)
+
 if the client has no current bank account with the current bank and he is a single male with skilled job status and his loan_status is yes then he is 92% likely to get a loan
-6
+
 Rule 5:
+
 account_status=no checking age=30<=X<40 145 ==> loan_status=yes 132 <conf:(0.91)> lift:(1.3) lev:(0.03) [30] conv:(3.09)
+
 If the client does not have a bank account with the current bank, he is between 30 and 40 years old and his loan status is yes, then he is 91% likely to get a loan.
+
 Rule 6:
+
 account_status=no checking credit_amount=1K<=X<2K 126 ==> loan_status=yes 114 <conf:(0.9)> lift:(1.29) lev:(0.03) [25] conv:(2.89)
+
 If the client has no current bank account with the current bank, his credit amount is between 1000 and 2000 and his loan status is yes then he is 90% likely to get a loan.
 
 ## Clustering
