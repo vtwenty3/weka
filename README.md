@@ -1,19 +1,19 @@
 This report would explain and show the methods used to analyze a raw database. In order to find patterns and relationships in a data which possibly have errors, we should start with preprocessing the whole database, which includes converting the data to use-ful format, converting and changing values, removing spelling errors, fixing outliers and improving the overall data consistency. Tools used: OpenRefine, Weka;
 
-##Data Cealning
+## Data Cealning
 This step aims to correct inconsistencies, typos and improve readability and usability of the data. This pre-processing step is crucial for working efficiently with the data.
 Firstly, the approach used when encountering missing data was replacing it with key-word “missing” to indicate that there is a problem with the current row but not com-pletely delete the record, which ensures that the rest of the information of the case is available. Changing the value to a mean value one can result in unexpected results, bad decision based on wrong data etc.
 After testing with several algorithms, I have decided that the more efficient and simple way is simply to delete the fields which include values that are not easily predictable.
 2
 “Id” column is not deleted originally, it can be considered as a column that is not provid-ing real value to the database but having an additional id can be helpful in some cases. When dataset is used in Weka “id” column is removed, as this improves the accuracy of the model.
 
-###Steps taken in pre-processing:
+### Steps taken in pre-processing:
 1. Adding a header as it was not present in the dataset provided. Renaming a few columns for better readability. See Table 1.
 2. Correcting errors, outliers and cleaning the data. Deleting rows which cannot be used properly for the training. See Table 2.
 3. Converting the data to nominal values and simplifying it for better training and accuracy. See Data conversion and simplification.
 ![image](https://user-images.githubusercontent.com/61486268/215581009-94b8f732-5a4f-4c73-b134-e6f798bac63e.png)
 
-###Data conversion and simplification
+### Data conversion and simplification
 Column “debth_status” attributes “all paid”, “ no credits/all paid” and “existing_paid” combined with “all paid”.
 Column “credit_reason” attributes “used car” and “new car” to car;
 attributes “domenestic appliance” and “furniture/equipment” to “furniture”;
