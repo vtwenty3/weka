@@ -15,13 +15,21 @@ After testing with several algorithms, I have decided that the more efficient an
 
 ### Data conversion and simplification
 Column “debth_status” attributes “all paid”, “ no credits/all paid” and “existing_paid” combined with “all paid”.
+
 Column “credit_reason” attributes “used car” and “new car” to car;
+
 attributes “domenestic appliance” and “furniture/equipment” to “furniture”;
+
 attribute “retraining” to “other”;
+
 Column “credit_amount” modified with python code to nominal values using the same logic as employment – “1K<=X<2K” meaning the credit amount is from 1000 (incl.) to 2000 (excl.). Not using raw numbers, because they can be hard to read when visual-izing a tree graph. 1K step until 5K, then 5<=X<10K and X>10K.
+
 Column “age” modified with python code to nominal values using the same logic as employment – Split to below 25, 25 to 30 (example in database 25<=X<30), 30 to 40, 50 to 50, above 50.
+
 Column “job_status” attributes “high qualif/self emp/mgmt.” to highly skilled;
+
 “unemp/unskilled non res” and “unskilled resident” to “unskilled”.
+
 After all the preprocessing is completed the dataset is saved in csv format and converted using Weka to .arff format.
 
 ## Data Analytics
@@ -127,6 +135,7 @@ If the client has no current bank account with the current bank, his credit amou
 
 Algorithm Used - simplekmeans
 Settings Used – Default with Clusters set to 6
+
 ![image](https://user-images.githubusercontent.com/61486268/215581377-f77f8b01-f941-4ad3-889f-57499ec99ff6.png)
 
  Clustered Instances:
